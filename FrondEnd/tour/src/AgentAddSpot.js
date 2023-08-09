@@ -93,7 +93,7 @@ function AddSpot() {
   const handleLogout = () => {
     console.clear();
     sessionStorage.clear();
-    window.location.href = '/AgentLogin';
+    window.location.href = '/';
   };
 
   return (

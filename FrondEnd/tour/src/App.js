@@ -20,6 +20,8 @@ import Booking from './TravellerBooking';
 import Payment from './TravellerPayment';
 import Status from './TravellerBookingStatus';
 import TravellerRegister from './TravellerRegister';
+import filter from './TravellerFilter';
+import allpack from './TravellerAllPackage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
@@ -48,6 +50,8 @@ function App() {
         <Route path="/Payment" Component={Payment}></Route>
         <Route path="/Status" Component={Status}></Route>
         <Route path="/TravellerRegister" Component={TravellerRegister}></Route>
+        <Route path="/Filter" Component={filter}></Route>
+        <Route path="/AllPackage" Component={allpack}></Route>
       </Routes>
       </BrowserRouter>
     </div>

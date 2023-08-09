@@ -27,6 +27,11 @@ export default function AdminLanding() {
           setLoading(false);
         }
       };
+
+      function clearSessionStorage() {
+        sessionStorage.clear();
+        window.location.href = '/';
+      }
     
       return (
         <div>
@@ -36,7 +41,7 @@ export default function AdminLanding() {
               <Navbar.Toggle aria-controls="navbarNav" />
               <Navbar.Collapse id="navbarNav">
                 <Nav className="ml-auto">
-                  <Nav.Link href="/Home" active>Home</Nav.Link>
+                  <Nav.Link href="/AdminLanding" active>Home</Nav.Link>
                   <Nav.Link href="/Requested">Requested</Nav.Link>
                   <Nav.Link href="/Accepted">Accepted</Nav.Link>
                   <Nav.Link href="/Full">Full</Nav.Link>
@@ -46,7 +51,7 @@ export default function AdminLanding() {
               <Nav.Link href="#">
                 <FontAwesomeIcon icon={faUser} />
               </Nav.Link>
-              <Nav.Link href="#" className="ml-2">Logout</Nav.Link>
+              <Nav.Link href="#" onClick={clearSessionStorage} className="ml-2">Logout</Nav.Link>
             </Container>
           </Navbar>
           <div className="container">

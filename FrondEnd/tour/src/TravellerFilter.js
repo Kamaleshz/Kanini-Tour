@@ -4,7 +4,8 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 
 function App() {
   const [data, setData] = useState([]);
-  const navigate = useNavigate(); // Use useNavigate hook for navigation
+  const [selectedType, setSelectedType] = useState('All'); // Updated state and variable names
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -12,10 +13,7 @@ function App() {
         const response = await fetch('https://localhost:7297/api/Package');
         const jsonData = await response.json();
 
-        const locationId = sessionStorage.getItem('location_Id');
-        const packagesForLocation = jsonData.filter(item => item.location_Id == locationId);
-
-        const packagesWithHover = packagesForLocation.map(item => ({ ...item, isHovered: false }));
+        const packagesWithHover = jsonData.map(item => ({ ...item, isHovered: false }));
         setData(packagesWithHover);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -58,6 +56,12 @@ function App() {
     window.location.href = '/';
   };
 
+  const filteredData = selectedType === 'All' // Updated condition
+    ? data
+    : data.filter(item => item.package_Type === selectedType);
+
+  const uniqueTypes = [...new Set(data.map(item => item.package_Type))]; // Updated variable name
+
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -67,19 +71,38 @@ function App() {
           <Navbar.Collapse id="navbarNav">
             <Nav className="ml-auto">
               <Nav.Link href="/" active>Home</Nav.Link>
-              <Nav.Link href="/Filter" active>Package</Nav.Link>
+              <Nav.Link href="/AllPackage" active>Package</Nav.Link>
+              <Nav.Link href="/Filter" active>Filter</Nav.Link>
               <Nav.Link href="#">Contact</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Nav.Link href="#" className="ml-2" onClick={handleLogout}>
-              Logout
-        </Nav.Link>
+            Logout
+          </Nav.Link>
         </Container>
       </Navbar>
       <div className="container mt-4">
-        <h4 className="text-center mb-4">Available Packages</h4>
         <div className="row">
-          {data.map(item => (
+          {/* Dropdown for filtering by package type */}
+          <div className="col-md-12 mb-4">
+            <NavDropdown
+              title={`Filter by Type: ${selectedType}`} // Updated text
+              id="package-type-dropdown" // Updated ID
+            >
+              <NavDropdown.Item onClick={() => setSelectedType('All')}>All</NavDropdown.Item>
+              {uniqueTypes.map(type => ( // Updated variable name
+                <NavDropdown.Item
+                  key={type}
+                  onClick={() => setSelectedType(type)}
+                >
+                  {type}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
+          </div>
+
+          {/* Display filtered data */}
+          {filteredData.map(item => (
             <div
               key={item.package_Id}
               className="col-md-4 mb-4"

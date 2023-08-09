@@ -93,7 +93,7 @@ const RegisterAgent = () => {
         <Navbar.Collapse id="navbarNav">
             <Nav className="ml-auto">
             <Nav.Link href="/" active>Home</Nav.Link>
-            <Nav.Link href="/Package" active>Package</Nav.Link>
+            <Nav.Link href="/Filter" active>Package</Nav.Link>
             <Nav.Link href="#">Contact</Nav.Link>
             </Nav>
         </Navbar.Collapse>
@@ -193,9 +193,6 @@ const RegisterAgent = () => {
         <Modal.Header closeButton>
           <Modal.Title>Registration Successful</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Registered successfully. Your account will be activated within a week.
-        </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={() => {
             setShowSuccessModal(false);

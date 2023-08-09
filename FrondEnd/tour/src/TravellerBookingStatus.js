@@ -38,6 +38,10 @@ function BookingDetails() {
     }
   }, [packageId]);
 
+  function clearSessionStorage() {
+    sessionStorage.clear();
+  }
+
   const formatDate = dateString => {
     const date = new Date(dateString);
     return date.toDateString();
@@ -50,9 +54,10 @@ function BookingDetails() {
   const MyDocument = (
     <Document>
     <Page style={{ fontFamily: 'Helvetica', padding: 20 }}>
-      <Text style={{ fontSize: 14, marginBottom: 10 }}>Booking Details</Text>
+      <Text style={{ fontSize: 14, marginBottom: 10 }}>TourVista</Text>
       {bookingDetailsList.map((booking, index) => (
         <React.Fragment key={index}>
+          <Text style={{ fontSize: 10 , textAlign:'center' }}>Booking Details</Text>
           <Text style={{ fontSize: 10 }}>Booking ID: {booking.booking_Id}</Text>
           <Text style={{ fontSize: 10 }}>Booking Date: {new Date(booking.booking_Date).toDateString()}</Text>
           <Text style={{ fontSize: 10 }}>Travellers Count: {booking.travellers_Count}</Text>
@@ -61,7 +66,7 @@ function BookingDetails() {
 
         </React.Fragment>
       ))}
-      <Text style={{ fontSize: 14, marginBottom: 10 }}>Package Details</Text>
+      <Text style={{ fontSize: 10 , textAlign:'center' }}>Package Details</Text>
       <Text style={{ fontSize: 10 }}>Package Name: {packageDetails.package_Name}</Text>
       <Text style={{ fontSize: 10 }}>Package Type: {packageDetails.package_Type}</Text>
       <Text style={{ fontSize: 10 }}>Package Rate: {packageDetails.package_Rate}</Text>
@@ -69,39 +74,31 @@ function BookingDetails() {
     </Page>
   </Document>
   );
+
+  const handleLogout = () => {
+    console.clear();
+    sessionStorage.clear();
+    window.location.href = '/';
+  };
   
 
   return (
     <div>
-      <Navbar bg="transparent" expand="lg" style={{ color: 'white', backdropFilter: 'blur(10px)' }}>
-    <Container>
-        <Navbar.Brand href="#" style={{  color: 'white' }}>
-        TourVista
-        </Navbar.Brand>
+<Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#">TourVista</Navbar.Brand>        
         <Navbar.Toggle aria-controls="navbarNav" />
         <Navbar.Collapse id="navbarNav">
-        <Nav className="ml-auto">
-            <Nav.Link href="/" active style={{ color: 'white' }}>
-            Home
-            </Nav.Link>
-            <Nav.Link href="/Package" active style={{ color: 'white' }}>
-            Package
-            </Nav.Link>
-            <Nav.Link href="#" style={{ color: 'white' }}>
-            Contact
-            </Nav.Link>
-        </Nav>
+          <Nav className="ml-auto">
+            <Nav.Link href="/"  onClick={clearSessionStorage} active>Home</Nav.Link>
+            <Nav.Link href="/Filter" active>Package</Nav.Link>
+            <Nav.Link href="#">Contact</Nav.Link>
+          </Nav>
         </Navbar.Collapse>
-        <NavDropdown
-        title="Login"
-        id="basic-nav-dropdown"
-        alignRight
-        >
-        <NavDropdown.Item href="/TravellerLogin">Traveller</NavDropdown.Item>
-        <NavDropdown.Item href="/AgentLogin">Travel Agent</NavDropdown.Item>
-        <NavDropdown.Item href="/AdminLogin">Admin</NavDropdown.Item>
-        </NavDropdown>
-    </Container>
+        <Nav.Link href="#" className="ml-2" onClick={handleLogout}>
+              Logout
+        </Nav.Link>
+      </Container>
     </Navbar>
       <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '40px' }}>
         <Card style={{ width: '600px' }}>

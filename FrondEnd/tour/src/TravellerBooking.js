@@ -50,6 +50,12 @@ export default function Booking() {
     }
   };
 
+  const handleLogout = () => {
+    console.clear();
+    sessionStorage.clear();
+    window.location.href = '/';
+  };
+
   return (
     <div>
     <Navbar bg="light" expand="lg">
@@ -59,15 +65,13 @@ export default function Booking() {
         <Navbar.Collapse id="navbarNav">
           <Nav className="ml-auto">
             <Nav.Link href="/" active>Home</Nav.Link>
-            <Nav.Link href="/Package" active>Package</Nav.Link>
+            <Nav.Link href="/Filter" active>Package</Nav.Link>
             <Nav.Link href="#">Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <NavDropdown title="Login" id="basic-nav-dropdown" alignRight>
-          <NavDropdown.Item href="/TravellerLogin">Traveller</NavDropdown.Item>
-          <NavDropdown.Item href="/AgentLogin">Travel Agent</NavDropdown.Item>
-          <NavDropdown.Item href="/AdminLogin">Admin</NavDropdown.Item>
-        </NavDropdown>
+        <Nav.Link href="#" className="ml-2" onClick={handleLogout}>
+              Logout
+        </Nav.Link>
       </Container>
     </Navbar>
     <div className="container mt-5">

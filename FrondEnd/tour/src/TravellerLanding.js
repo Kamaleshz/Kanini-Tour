@@ -42,7 +42,7 @@ export default function Home() {
             <Nav.Link href="/" active style={{ color: 'white' }}>
             Home
             </Nav.Link>
-            <Nav.Link href="/Package" active style={{ color: 'white' }}>
+            <Nav.Link href="/Filter" active style={{ color: 'white' }}>
             Package
             </Nav.Link>
             <Nav.Link href="#" style={{ color: 'white' }}>

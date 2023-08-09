@@ -33,7 +33,7 @@ export default function AgentLanding() {
   const handleLogout = () => {
     console.clear();
     sessionStorage.clear();
-    window.location.href = '/AgentLogin';
+    window.location.href = '/';
   };
 
   return (

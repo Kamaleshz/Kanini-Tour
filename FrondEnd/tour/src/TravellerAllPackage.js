@@ -12,10 +12,7 @@ function App() {
         const response = await fetch('https://localhost:7297/api/Package');
         const jsonData = await response.json();
 
-        const locationId = sessionStorage.getItem('location_Id');
-        const packagesForLocation = jsonData.filter(item => item.location_Id == locationId);
-
-        const packagesWithHover = packagesForLocation.map(item => ({ ...item, isHovered: false }));
+        const packagesWithHover = jsonData.map(item => ({ ...item, isHovered: false }));
         setData(packagesWithHover);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -72,12 +69,11 @@ function App() {
             </Nav>
           </Navbar.Collapse>
           <Nav.Link href="#" className="ml-2" onClick={handleLogout}>
-              Logout
-        </Nav.Link>
+            Logout
+          </Nav.Link>
         </Container>
       </Navbar>
       <div className="container mt-4">
-        <h4 className="text-center mb-4">Available Packages</h4>
         <div className="row">
           {data.map(item => (
             <div
